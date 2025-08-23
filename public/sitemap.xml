@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://tejirimayone.com.ng/post/flexible_data_structures_in_ypescript_working_with_arrays_of_ynamic_objects/</loc>
+    <lastmod>2025-08-23T18:45:58+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://tejirimayone.com.ng/</loc>
+    <lastmod>2025-08-23T18:45:58+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://tejirimayone.com.ng/post/</loc>
+    <lastmod>2025-08-23T18:45:58+01:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
     <loc>https://tejirimayone.com.ng/techs/angular/</loc>
     <lastmod>2025-04-13T20:04:31+01:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -22,22 +37,12 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://tejirimayone.com.ng/</loc>
-    <lastmod>2025-04-13T20:04:31+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://tejirimayone.com.ng/designs/html/</loc>
     <lastmod>2025-04-13T20:04:31+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
     <loc>https://tejirimayone.com.ng/techs/laravel/</loc>
-    <lastmod>2025-04-13T20:04:31+01:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://tejirimayone.com.ng/post/</loc>
     <lastmod>2025-04-13T20:04:31+01:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
