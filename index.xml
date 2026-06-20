@@ -1,1 +1,76 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Home on Tejiri Mayone</title><link>https://www.dipbits.com/</link><description>Recent content in Home on Tejiri Mayone</description><generator>Hugo</generator><language>en</language><atom:link href="https://www.dipbits.com/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HOME on Tejiri Mayone</title><link>https://tejirimayone.com.ng/</link><description>Recent content in HOME on Tejiri Mayone</description><generator>Hugo</generator><language>en-us</language><copyright>© copyright 2024</copyright><lastBuildDate>Sat, 23 Aug 2025 18:45:58 +0100</lastBuildDate><atom:link href="https://tejirimayone.com.ng/index.xml" rel="self" type="application/rss+xml"/><item><title>Flexible Data Structures in TypeScript: Working with Arrays of Dynamic Objects</title><link>https://tejirimayone.com.ng/post/flexible_data_structures_in_ypescript_working_with_arrays_of_ynamic_objects/</link><pubDate>Sat, 23 Aug 2025 18:45:58 +0100</pubDate><guid>https://tejirimayone.com.ng/post/flexible_data_structures_in_ypescript_working_with_arrays_of_ynamic_objects/</guid><description>&lt;figure>&lt;img src="https://tejirimayone.com.ng/post/images/flexible_data_structures_in_ypeScript_working_with_arrays_of_ynamic_objects.png"
+ alt="Flexible Data Structures in TypeScript:">&lt;figcaption>
+ &lt;p>Flexible Data Structures in TypeScript:&lt;/p>
+ &lt;/figcaption>
+&lt;/figure></description></item><item><title>Applicant Tracking System (ATS)</title><link>https://tejirimayone.com.ng/portfolio/atsystems/</link><pubDate>Sun, 13 Apr 2025 20:04:31 +0100</pubDate><guid>https://tejirimayone.com.ng/portfolio/atsystems/</guid><description>&lt;h3 id="project-overview">Project Overview&lt;/h3>
+&lt;p>The &lt;strong>Applicant Management System&lt;/strong> is a full-stack web application I developed to streamline applicant data management and document generation. Built with &lt;strong>Laravel&lt;/strong> for a robust backend and &lt;strong>Angular&lt;/strong> for a dynamic frontend, this system enables administrators to manage applicant records, filter data interactively, and generate consolidated PDF reports from various file types (DOCX, PDFs, images). Hosted on &lt;strong>AWS&lt;/strong>, it demonstrates my expertise in delivering scalable, user-focused solutions.&lt;/p>
+&lt;h3 id="technologies-used">Technologies Used&lt;/h3>
+&lt;p>&lt;strong>Backend:&lt;/strong> PHP, Laravel, DomPDF, Fpdi, PhpWord&lt;/p></description></item><item><title>Resolving CORS Issues in Laravel Sanctum on Shared Hosting</title><link>https://tejirimayone.com.ng/post/resolving_cors_issues_in_laravel_sanctum_on_shared_hosting/</link><pubDate>Sun, 13 Apr 2025 20:04:31 +0100</pubDate><guid>https://tejirimayone.com.ng/post/resolving_cors_issues_in_laravel_sanctum_on_shared_hosting/</guid><description>&lt;figure>&lt;img src="https://tejirimayone.com.ng/post/images/web-api-cors.png"
+ alt="cors error with santum laravel PHP framework">&lt;figcaption>
+ &lt;p>cors error with santum laravel PHP framework&lt;/p>
+ &lt;/figcaption>
+&lt;/figure></description></item><item><title>Strings in PHP: Mutable, Not Immutable</title><link>https://tejirimayone.com.ng/post/string_in_php_not_immutable/</link><pubDate>Thu, 03 Apr 2025 21:44:56 +0100</pubDate><guid>https://tejirimayone.com.ng/post/string_in_php_not_immutable/</guid><description>&lt;figure>&lt;img src="https://tejirimayone.com.ng/post/images/php-logo-png.webp"
+ alt="strings in PHP are not immutable with a comparison with Java">&lt;figcaption>
+ &lt;p>strings in PHP are not immutable with a comparison with Java&lt;/p>
+ &lt;/figcaption>
+&lt;/figure></description></item><item><title>Introduction to JavaScript Web Workers A Beginner's Guide</title><link>https://tejirimayone.com.ng/post/javascript_web_workers/</link><pubDate>Mon, 13 Jan 2025 14:16:35 +0100</pubDate><guid>https://tejirimayone.com.ng/post/javascript_web_workers/</guid><description>&lt;figure>&lt;img src="https://tejirimayone.com.ng/post/images/web-worker.png"
+ alt="Javascript Web Worker: A Beginner&amp;rsquo;s Guide">&lt;figcaption>
+ &lt;p>Javascript Web Worker: A Beginner&amp;rsquo;s Guide&lt;/p>
+ &lt;/figcaption>
+&lt;/figure></description></item><item><title>How to Build a WordPress Website and Host It for Free</title><link>https://tejirimayone.com.ng/post/how_to_host_free_wordpress_for_free/</link><pubDate>Tue, 17 Dec 2024 16:21:54 +0100</pubDate><guid>https://tejirimayone.com.ng/post/how_to_host_free_wordpress_for_free/</guid><description>&lt;figure>&lt;img src="https://tejirimayone.com.ng/post/images/how_to_host_free_wordpress_for_free.jpeg"
+ alt="Javascript Reducer">&lt;figcaption>
+ &lt;p>Javascript Reducer&lt;/p>
+ &lt;/figcaption>
+&lt;/figure></description></item><item><title>Samish Real Estate :Wordpress</title><link>https://tejirimayone.com.ng/portfolio/samish/</link><pubDate>Tue, 02 Jul 2024 15:28:41 +0100</pubDate><guid>https://tejirimayone.com.ng/portfolio/samish/</guid><description>&lt;h3 id="overview">Overview&lt;/h3>
+&lt;p>I had the privilege of developing a comprehensive website for Samish Real Estate Company, a leading construction company. This project involved implementing several advanced features to ensure the site is secure, functional, and user-friendly.&lt;/p>
+&lt;h3 id="features">Features&lt;/h3>
+&lt;h4 id="ssl-certification">SSL Certification&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Security First&lt;/strong>: Implemented SSL certification to ensure all data transmitted between the user&amp;rsquo;s browser and the website is encrypted and secure. This not only protects user data but also builds trust with clients visiting the site.&lt;/li>
+&lt;/ul>
+&lt;h4 id="ddos-security">DDoS Security&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Robust Protection&lt;/strong>: Integrated advanced DDoS security measures to safeguard the website from malicious attacks. This ensures that the site remains operational and accessible, even during potential threats.&lt;/li>
+&lt;/ul>
+&lt;h4 id="seo-optimization">SEO Optimization&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Visibility Boost&lt;/strong>: Applied best practices in search engine optimization to enhance the website&amp;rsquo;s visibility on search engines. This includes keyword optimization, meta tags, and a clean URL structure to attract more organic traffic.&lt;/li>
+&lt;/ul>
+&lt;h4 id="company-emails">Company Emails&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>Professional Communication&lt;/strong>: Set up professional company email addresses to ensure seamless communication within the organization and with clients. This promotes a cohesive brand image and improves operational efficiency.&lt;/li>
+&lt;/ul>
+&lt;h4 id="modern-design-layout">Modern Design Layout&lt;/h4>
+&lt;ul>
+&lt;li>&lt;strong>User-Friendly Interface&lt;/strong>: Designed a sleek, modern layout that offers an intuitive user experience. The design is responsive, ensuring the website looks great and functions well on all devices, from desktops to smartphones.&lt;/li>
+&lt;/ul>
+&lt;h3 id="technologies-used">Technologies Used&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>Front-End&lt;/strong>: HTML5, CSS3, JavaScript&lt;/li>
+&lt;li>&lt;strong>Back-End&lt;/strong>: PHP, Laravel&lt;/li>
+&lt;li>&lt;strong>Database&lt;/strong>: MySQL&lt;/li>
+&lt;li>&lt;strong>Security&lt;/strong>: SSL, DDoS protection tools&lt;/li>
+&lt;li>&lt;strong>SEO Tools&lt;/strong>: Google Analytics, Yoast SEO&lt;/li>
+&lt;/ul>
+&lt;h3 id="project-outcome">Project Outcome&lt;/h3>
+&lt;p>The Samish Real Estate Company website now stands out with its advanced security features, professional communication channels, and optimized search engine performance. The modern design enhances user experience, making it easier for potential clients to navigate and find the information they need.&lt;/p></description></item><item><title>Legislative Initiative For Sustainable Development :Wordpress</title><link>https://tejirimayone.com.ng/portfolio/lisdel/</link><pubDate>Tue, 02 Jul 2024 10:35:11 +0100</pubDate><guid>https://tejirimayone.com.ng/portfolio/lisdel/</guid><description>&lt;h3 id="description">Description&lt;/h3>
+&lt;p>LISDEL Wordpress site, is a NGO website crafted with SEO excellence for optimal visibility. Navigate through captivating sliders and a stunning picture gallery, all seamlessly built with Elementor for a fluid, engaging user experience.&lt;/p>
+&lt;h3 id="key-features">Key Features&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>SEO Optimization&lt;/strong>: The site is fully optimized for search engines, ensuring higher visibility and better ranking on search results. This includes keyword integration, meta tags, and fast loading times.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Sliders&lt;/strong>: Dynamic sliders are integrated on the homepage and key landing pages, offering a visually stunning way to showcase featured content, promotions, and announcements. These sliders are fully responsive and customizable.&lt;/p></description></item><item><title>The power of the Javascript reduce() function.</title><link>https://tejirimayone.com.ng/post/the-power-of-the-javascript-reduce-function/</link><pubDate>Tue, 16 Apr 2024 10:33:46 +0200</pubDate><guid>https://tejirimayone.com.ng/post/the-power-of-the-javascript-reduce-function/</guid><description>&lt;figure>&lt;img src="https://tejirimayone.com.ng/post/images/javascript_reduce.png"
+ alt="Javascript Reducer">&lt;figcaption>
+ &lt;p>Javascript Reducer&lt;/p>
+ &lt;/figcaption>
+&lt;/figure></description></item><item><title>Sterock Engineering Limited :Wordpress</title><link>https://tejirimayone.com.ng/portfolio/sterockengineeringlimited/</link><pubDate>Thu, 30 Mar 2023 16:52:42 +0100</pubDate><guid>https://tejirimayone.com.ng/portfolio/sterockengineeringlimited/</guid><description>&lt;h3 id="project-overview">Project Overview&lt;/h3>
+&lt;p>Sterock Engineering Limited is a leading construction company, and I had the privilege of developing their official website. This project was aimed at creating a secure, modern, and highly functional online presence that meets the company&amp;rsquo;s needs and enhances their digital footprint.&lt;/p>
+&lt;h3 id="key-features">Key Features&lt;/h3>
+&lt;h4 id="ssl-certificate">SSL Certificate&lt;/h4>
+&lt;p>To ensure the security and privacy of user data, I implemented an SSL certificate. This encrypts data transmitted between the users and the website, providing a secure browsing experience.&lt;/p></description></item><item><title>How to create a simple floating menu with HTML and CSS</title><link>https://tejirimayone.com.ng/post/how_to_create_a_simple_floating_menu_with_html_and_css/</link><pubDate>Wed, 01 Mar 2023 09:50:46 +0200</pubDate><guid>https://tejirimayone.com.ng/post/how_to_create_a_simple_floating_menu_with_html_and_css/</guid><description>&lt;figure>&lt;img src="https://tejirimayone.com.ng/post/images/how_to_create_a_simple_floating_menu_with_html_and_css.jpeg"
+ alt="floating menu with HTML and CSS">&lt;figcaption>
+ &lt;p>floating menu with HTML and CSS&lt;/p>
+ &lt;/figcaption>
+&lt;/figure></description></item></channel></rss>
