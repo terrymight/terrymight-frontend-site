@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TERMINAL on Tejiri Mayone</title>
+    <link>http://localhost:1313/categories/terminal/</link>
+    <description>Recent content in TERMINAL on Tejiri Mayone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© 2026 Tejiri Mayone</copyright>
+    <lastBuildDate>Thu, 18 Aug 2022 09:50:46 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/terminal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Upload Files TO Github Using Bash</title>
+      <link>http://localhost:1313/post/upload-files-to-github-using-bash/</link>
+      <pubDate>Thu, 18 Aug 2022 09:50:46 +0200</pubDate>
+      <guid>http://localhost:1313/post/upload-files-to-github-using-bash/</guid>
+      <description>Introduction Bash is a Unix shell and command language written by Brian Fox for the GNU Project as a free software replacement for the Bourne shell.&#xA;A bash script is a series of commands written in a file. These are read and executed by the bash program. The program executes line by line.&#xA;Requirement You need to have a beginner knowledge on the following :&#xA;Text editors (we will be using Visual Studio Code).</description>
+    </item>
+  </channel>
+</rss>

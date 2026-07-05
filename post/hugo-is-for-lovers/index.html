@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+
+<title>
+    
+    How to Build a Fast Developer Portfolio with Hugo and Tailwind CSS | Tejiri Mayone
+    
+</title>
+
+<meta
+    name="description"
+    content="Learn how to build a fast, maintainable developer portfolio using Hugo, Tailwind CSS, and Markdown-driven content.">
+
+<meta
+    name="author"
+    content="Tejiri Mayone">
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+
+<link rel="stylesheet" href="http://localhost:1313/css/main.min.afc3ac2a6c21515335d32fe88aa2a2f9eb8a3e40894b97c840835188f7ccd463.css">
+
+<link
+    rel="stylesheet"
+    href="http://localhost:1313/css/main.min.afc3ac2a6c21515335d32fe88aa2a2f9eb8a3e40894b97c840835188f7ccd463.css">
+</head>
+
+<body class="bg-cream text-emerald-deep font-sans">
+
+    <nav class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-emerald-deep/5">
+
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+        <a
+    href="http://localhost:1313/"
+    class="font-mono font-semibold tracking-tighter text-lg uppercase text-emerald-deep">
+
+    T.Mayone
+
+</a>
+
+        <div class="hidden md:flex items-center gap-8">
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Index
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/portfolio/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Work
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/services/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Services
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/about/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                About
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/post/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Notes
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/faq/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                FAQ
+
+            </a>
+
+        
+
+    
+
+        
+
+    
+
+    <a href="http://localhost:1313/contact/"
+   class="
+   inline-flex items-center justify-center
+   px-4 py-2
+   rounded-sm
+   text-sm
+   font-medium
+   transition-colors
+
+   
+        bg-emerald-deep
+        text-cream
+        hover:bg-emerald-mid
+   
+">
+
+Hire Me
+
+</a>
+
+</div>
+
+        <button
+    class="md:hidden text-emerald-deep text-2xl"
+    type="button"
+    aria-label="Open navigation">
+
+    ☰
+
+</button>
+
+    </div>
+
+</nav>
+
+    <main>
+        
+
+<article class="max-w-3xl mx-auto py-20">
+    <h1 class="text-4xl font-mono mb-6">How to Build a Fast Developer Portfolio with Hugo and Tailwind CSS</h1>
+
+    
+        <img src="http://localhost:1313/posts/banner-3.jpg" class="mb-10 rounded-lg">
+    
+
+    <div class="prose">
+        <h2 id="introduction">Introduction</h2>
+<p>A portfolio website should be easy to maintain, fast to load, and flexible enough to grow with your career. Static site generators such as Hugo make this possible by separating content from presentation while generating highly optimized HTML.</p>
+<p>In this guide, I&rsquo;ll walk through the approach I used to build a developer portfolio powered by Hugo, Tailwind CSS, and reusable components.</p>
+<hr>
+<h2 id="why-hugo">Why Hugo?</h2>
+<p>Hugo offers several advantages for portfolio websites:</p>
+<ul>
+<li><strong>Extremely fast build times:</strong> Generates thousands of pages in milliseconds.</li>
+<li><strong>Markdown-based content management:</strong> Write your content cleanly without touching HTML layout code.</li>
+<li><strong>SEO-friendly static pages:</strong> Clean structures, fast performance, and built-in sitemap generation.</li>
+<li><strong>Reusable layouts and partials:</strong> Maintain a single layout while serving infinite variations.</li>
+<li><strong>No database required:</strong> Removes database overhead, making security breaches a non-issue.</li>
+<li><strong>Easy deployment:</strong> Can be hosted effortlessly on GitHub Pages, Vercel, or Netlify.</li>
+</ul>
+<p>These features make Hugo an excellent choice for technical portfolios and posts.</p>
+<hr>
+<h2 id="project-structure">Project Structure</h2>
+<p>Organizing your project properly makes it easier to scale. Here is a baseline of how your directories should look:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>content/
+</span></span><span style="display:flex;"><span>├── blog/
+</span></span><span style="display:flex;"><span>├── portfolio/
+</span></span><span style="display:flex;"><span>└── about/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>layouts/
+</span></span><span style="display:flex;"><span>├── _default/
+</span></span><span style="display:flex;"><span>├── partials/
+</span></span><span style="display:flex;"><span>├── portfolio/
+</span></span><span style="display:flex;"><span>└── blog/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>static/
+</span></span><span style="display:flex;"><span>└── images/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>```markdown
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#34;How to Build a Fast Developer Portfolio with Hugo and Tailwind CSS&#34;
+</span></span><span style="display:flex;"><span>description: &#34;Learn how to build a fast, maintainable developer portfolio using Hugo, Tailwind CSS, and Markdown-driven content.&#34;
+</span></span><span style="display:flex;"><span>date: 2025-08-03
+</span></span><span style="display:flex;"><span>summary: &#34;A practical guide to building a modern portfolio website with Hugo, Tailwind CSS, reusable partials, and content-driven architecture.&#34;
+</span></span><span style="display:flex;"><span>cover: &#34;/images/blog/banner-3.jpg&#34;
+</span></span><span style="display:flex;"><span>thumbnail: &#34;/images/blog/banner-3.jpg&#34;
+</span></span><span style="display:flex;"><span>categories:
+</span></span><span style="display:flex;"><span>  - Hugo
+</span></span><span style="display:flex;"><span>tags:
+</span></span><span style="display:flex;"><span>  - Hugo
+</span></span><span style="display:flex;"><span>  - Tailwind CSS
+</span></span><span style="display:flex;"><span>  - Static Sites
+</span></span><span style="display:flex;"><span>  - Portfolio
+</span></span><span style="display:flex;"><span>  - Web Development
+</span></span><span style="display:flex;"><span>authors:
+</span></span><span style="display:flex;"><span>  - Tejiri Mayone
+</span></span><span style="display:flex;"><span>featured: true
+</span></span><span style="display:flex;"><span>draft: false
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## Introduction
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>A portfolio website should be easy to maintain, fast to load, and flexible enough to grow with your career. Static site generators such as Hugo make this possible by separating content from presentation while generating highly optimized HTML.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>In this guide, I&#39;ll walk through the approach I used to build a developer portfolio powered by Hugo, Tailwind CSS, and reusable components.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## Why Hugo?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Hugo offers several advantages for portfolio websites:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>* **Extremely fast build times:** Generates thousands of pages in milliseconds.
+</span></span><span style="display:flex;"><span>* **Markdown-based content management:** Write your content cleanly without touching HTML layout code.
+</span></span><span style="display:flex;"><span>* **SEO-friendly static pages:** Clean structures, fast performance, and built-in sitemap generation.
+</span></span><span style="display:flex;"><span>* **Reusable layouts and partials:** Maintain a single layout while serving infinite variations.
+</span></span><span style="display:flex;"><span>* **No database required:** Removes database overhead, making security breaches a non-issue.
+</span></span><span style="display:flex;"><span>* **Easy deployment:** Can be hosted effortlessly on GitHub Pages, Vercel, or Netlify.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>These features make Hugo an excellent choice for technical portfolios and blogs.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## Project Structure
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Organizing your project properly makes it easier to scale. Here is a baseline of how your directories should look:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>```text
+</span></span><span style="display:flex;"><span>content/
+</span></span><span style="display:flex;"><span>├── blog/
+</span></span><span style="display:flex;"><span>├── portfolio/
+</span></span><span style="display:flex;"><span>└── about/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>layouts/
+</span></span><span style="display:flex;"><span>├── _default/
+</span></span><span style="display:flex;"><span>├── partials/
+</span></span><span style="display:flex;"><span>├── portfolio/
+</span></span><span style="display:flex;"><span>└── blog/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>static/
+</span></span><span style="display:flex;"><span>└── images/
+</span></span></code></pre></div><hr>
+<h2 id="build-reusable-components">Build Reusable Components</h2>
+<p>Instead of duplicating HTML across multiple pages, create reusable partials for common sections. Save these inside your <code>layouts/partials/</code> folder.</p>
+<p>Examples include:</p>
+<ul>
+<li>Navigation / Header</li>
+<li>Hero section</li>
+<li>Portfolio grid &amp; Project cards</li>
+<li>Blog list preview cards</li>
+<li>Contact form section</li>
+<li>Footer</li>
+</ul>
+<p>This atomic approach keeps templates clean and significantly easier to maintain as you update your site&rsquo;s styles.</p>
+<hr>
+<h2 id="store-content-in-markdown">Store Content in Markdown</h2>
+<p>Rather than hard-coding projects or blog posts directly into HTML files, create one Markdown file for each piece of content.</p>
+<p>For example, a project file inside <code>content/portfolio/apex-real-estate.md</code> might look like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: &#34;Apex Real Estate&#34;
+</span></span><span style="display:flex;"><span>date: 2026-06-28
+</span></span><span style="display:flex;"><span>technologies:
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-</span> Laravel
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">-</span> Angular
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Detailed case study and information about the project goes here...
+</span></span></code></pre></div><p>Hugo automatically iterates through these files and loops them beautifully into your portfolio templates.</p>
+<hr>
+<h2 id="use-tailwind-css">Use Tailwind CSS</h2>
+<p>Tailwind CSS allows you to build consistent interfaces quickly without maintaining large, decoupled stylesheets.</p>
+<p>Benefits include:</p>
+<ul>
+<li><strong>Responsive layouts:</strong> Effortless layout shifts using inline modifiers (e.g., <code>md:grid-cols-2</code>).</li>
+<li><strong>Utility-first styling:</strong> Speeds up your development process without breaking context.</li>
+<li><strong>Easy customization:</strong> Extend design tokens via the <code>tailwind.config.js</code> configuration.</li>
+<li><strong>Smaller production CSS builds:</strong> Unused utilities are entirely purged during compile time.</li>
+</ul>
+<hr>
+<h2 id="optimize-images">Optimize Images</h2>
+<p>Store project assets and blog images inside the <code>static/images/</code> directory and keep your filenames semantic and descriptive.</p>
+<p>Organize them into explicit sub-directories:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>static/images/
+</span></span><span style="display:flex;"><span>├── portfolio/
+</span></span><span style="display:flex;"><span>└── blog/
+</span></span></code></pre></div><p>This structural separation keeps your asset pipeline highly organized as your site grows over the years.</p>
+<hr>
+<h2 id="deploy">Deploy</h2>
+<p>Once your portfolio is complete, deploy it to your preferred hosting provider. Because Hugo builds everything down into pure, static files (<code>index.html</code>, vanilla <code>.css</code>, and <code>.js</code>), deployment is extremely straightforward and doesn&rsquo;t require any runtime or server-side database configuration.</p>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>Hugo and Tailwind CSS provide an excellent foundation for building a modern developer portfolio. By organizing your content with Markdown, creating reusable partials, and strictly separating content from presentation, you can maintain a professional website that is blazing fast, infinitely scalable, and easy to update as your career evolves.</p>
+<pre tabindex="0"><code></code></pre>
+    </div>
+</article>
+
+
+    </main>
+
+    <section class="py-12 border-t border-emerald-deep/5">
+
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+
+        <div class="flex items-center gap-6">
+
+            
+
+            <a
+                href="https://github.com/terrymight"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                GitHub
+
+            </a>
+
+            
+
+            <a
+                href="https://linkedin.com/in/tejiri-mayone-2090a266"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                LinkedIn
+
+            </a>
+
+            
+
+            <a
+                href="https://x.com/bobjeorge4real"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                X
+
+            </a>
+
+            
+
+            <a
+                href="https://youtube.com/@tdevclass"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                YouTube
+
+            </a>
+
+            
+
+        </div>
+
+        <div class="flex items-center gap-4">
+
+            <span class="size-2 rounded-full bg-emerald-mid"></span>
+
+            <span class="text-sm font-medium">
+
+                Available for Projects
+
+            </span>
+
+            <a
+                href="mailto:hello@tejirimayone.com.ng"
+                class="ml-4 text-sm font-mono text-emerald-deep underline decoration-gold/50 underline-offset-4 hover:decoration-gold transition-all">
+
+                hello@tejirimayone.com.ng
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <footer class="bg-cream border-t border-emerald-deep/5 py-16">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+
+            <div class="space-y-4">
+
+                <p class="font-mono text-xl font-medium tracking-tight">
+
+                    Tejiri Mayone
+
+                </p>
+
+                <p class="text-sm text-emerald-deep/50 max-w-[30ch]">
+
+                    Architecting digital solutions with technical precision
+                    and aesthetic authority.
+
+                </p>
+
+            </div>
+
+            <div class="text-right">
+
+                <p class="font-mono text-xs text-emerald-deep/30 mb-2 uppercase tracking-tighter">
+
+                    Built with
+
+                </p>
+
+                <p class="font-mono text-sm">
+
+                    Hugo &#43; Tailwind CSS
+
+                </p>
+
+                <p class="font-mono text-xs text-emerald-deep/30 mt-8">
+
+                    © 2026 Tejiri Mayone
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>

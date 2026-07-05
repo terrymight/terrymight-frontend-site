@@ -1,0 +1,145 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Upload Files to GitHub Using a Bash Script | Tejiri Mayone
+</title><meta name=title content=" Upload Files to GitHub Using a Bash Script"><meta name=description content="Automate committing and pushing your project to GitHub using a simple Bash deployment script."><meta name=author content="Tejiri Mayone"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://tejirimayone.com.ng/css/main.min.735a5e38c05ae082a568719ee550d2d3b66b8e155465be8ba27f34b6754f5e07.css><link rel=stylesheet href=https://tejirimayone.com.ng/css/main.min.735a5e38c05ae082a568719ee550d2d3b66b8e155465be8ba27f34b6754f5e07.css></head><body class="bg-cream text-emerald-deep font-sans"><div id=progress class="fixed top-0 left-0 h-1 bg-gold z-[9999] transition-all duration-75" style=width:0%></div><nav id=navbar class="fixed top-0 left-0 w-full z-40 transition-all duration-300 bg-cream/80 backdrop-blur-md border-b border-emerald-deep/10"><div id=navbar-inner class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between transition-all duration-300"><div class="font-mono text-sm uppercase tracking-widest"><a href=https://tejirimayone.com.ng/ class="font-mono font-semibold tracking-tighter text-lg uppercase text-emerald-deep">T.Mayone</a></div><div class="hidden md:flex gap-8 font-mono text-xs text-emerald-deep/70"><div class="hidden md:flex gap-8 items-center"><a href=https://tejirimayone.com.ng/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Index
+</a><a href=https://tejirimayone.com.ng/portfolio/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Work
+</a><a href=https://tejirimayone.com.ng/services/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Services
+</a><a href=https://tejirimayone.com.ng/about/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">About
+</a><a href=https://tejirimayone.com.ng/blog/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Notes
+</a><a href=https://tejirimayone.com.ng/faq/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">FAQ
+</a><a href=https://tejirimayone.com.ng/contact/ class="relative inline-flex items-center px-5 py-2 text-xs font-mono uppercase tracking-widest text-cream bg-emerald-deep rounded-2xl overflow-hidden group transition-all"><span class="relative z-10">Hire Me</span>
+<span class="absolute inset-0 bg-emerald-deep/80 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span></a></div></div><div class=md:hidden><button id=nav-toggle class="md:hidden text-[#064e3b] text-3xl p-2 focus:outline-none" type=button aria-label="Open menu">
+☰</button><div id=nav-dialog style=z-index:2147483647!important class="fixed inset-0 hidden" role=dialog aria-modal=true><div id=nav-backdrop class="fixed inset-0 bg-[#064e3b]/40 backdrop-blur-md opacity-0 transition-all duration-300 z-0"></div><div id=mobile-menu class="fixed inset-0 overflow-hidden pointer-events-none"><div id=nav-panel class="pointer-events-auto absolute right-0 inset-y-0 w-[80%] max-w-sm bg-[#f5f0e0] shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out"><div class="flex items-start justify-end p-6"><button id=nav-close type=button class="text-[#064e3b] hover:text-[#c9a84c] text-2xl p-2 transition-colors focus:outline-none" aria-label="Close menu">
+✕</button></div><nav class="flex-1 overflow-y-auto px-8 py-4"><div class="flex flex-col gap-6 font-mono text-sm uppercase text-[#064e3b]"><a href=https://tejirimayone.com.ng/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Index
+</a><a href=https://tejirimayone.com.ng/portfolio/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Work
+</a><a href=https://tejirimayone.com.ng/services/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Services
+</a><a href=https://tejirimayone.com.ng/about/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">About
+</a><a href=https://tejirimayone.com.ng/blog/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Notes
+</a><a href=https://tejirimayone.com.ng/faq/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">FAQ
+</a><a href=https://tejirimayone.com.ng/contact/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Hire Me</a></div></nav></div></div></div></div></div></nav><main><article class="py-28 bg-cream"><div class="max-w-3xl mx-auto px-6 leading-relaxed"><header class=mb-10><a href=https://tejirimayone.com.ng/blog/ class="inline-block mb-10 font-mono text-xs text-gold underline">← Back to Blog</a><h1 class="text-5xl font-mono font-medium uppercase leading-tight">Upload Files to GitHub Using a Bash Script</h1><div class="mt-4 flex items-center gap-3 font-mono text-xs text-emerald-deep/50 uppercase"><span>18 Aug 2022</span>
+<span class="size-1 rounded-full bg-gold"></span>
+<span>Git
+</span><span class="size-1 rounded-full bg-gold"></span>
+<span>4 min read</span></div></header><img src=https://tejirimayone.com.ng/posts/bash.jpg class="w-full rounded-lg mb-10" loading=lazy><div class="prose max-w-none text-emerald-deep/80"><h2 id=introduction>Introduction</h2><p>If you find yourself repeatedly typing the same Git commands every time you finish working on a project, a simple Bash script can automate the process.</p><p>In this tutorial, you&rsquo;ll create a deployment script that stages your changes, creates a commit, and pushes everything to GitHub with a single command.</p><hr><h2 id=prerequisites>Prerequisites</h2><p>Before starting, make sure you have:</p><ul><li>Git installed</li><li>A GitHub account</li><li>A Git repository already initialized</li><li>Basic terminal knowledge</li><li>Visual Studio Code (or any text editor)</li></ul><hr><h2 id=step-1-navigate-to-your-project>Step 1: Navigate to Your Project</h2><p>Open a terminal and move into your project directory:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cd ~/Documents/projects/my-project
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Here is your blog post cleanly formatted with valid Hugo YAML front matter and structured Markdown syntax <span style=color:#66d9ef>for</span> seamless compilation:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>markdown
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>title: <span style=color:#e6db74>&#34;Upload Files to GitHub Using a Bash Script&#34;</span>
+</span></span><span style=display:flex><span>description: <span style=color:#e6db74>&#34;Automate committing and pushing your project to GitHub using a simple Bash deployment script.&#34;</span>
+</span></span><span style=display:flex><span>date: 2022-08-18
+</span></span><span style=display:flex><span>summary: <span style=color:#e6db74>&#34;Learn how to automate Git commits and pushes with a reusable Bash deployment script.&#34;</span>
+</span></span><span style=display:flex><span>cover: <span style=color:#e6db74>&#34;/images/post/bash.jpg&#34;</span>
+</span></span><span style=display:flex><span>thumbnail: <span style=color:#e6db74>&#34;/images/post/bash.jpg&#34;</span>
+</span></span><span style=display:flex><span>categories:
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;Git&#34;</span>
+</span></span><span style=display:flex><span>tags:
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;Git&#34;</span>
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;GitHub&#34;</span>
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;Bash&#34;</span>
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;Linux&#34;</span>
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;Terminal&#34;</span>
+</span></span><span style=display:flex><span>authors:
+</span></span><span style=display:flex><span>  - <span style=color:#e6db74>&#34;Tejiri Mayone&#34;</span>
+</span></span><span style=display:flex><span>featured: false
+</span></span><span style=display:flex><span>draft: false
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Introduction</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>If you find yourself repeatedly typing the same Git commands every time you finish working on a project, a simple Bash script can automate the process.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>In this tutorial, you<span style=color:#960050;background-color:#1e0010>&#39;</span>ll create a deployment script that stages your changes, creates a commit, and pushes everything to GitHub with a single command.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Prerequisites</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Before starting, make sure you have:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>* Git installed
+</span></span><span style=display:flex><span>* A GitHub account
+</span></span><span style=display:flex><span>* A Git repository already initialized
+</span></span><span style=display:flex><span>* Basic terminal knowledge
+</span></span><span style=display:flex><span>* Visual Studio Code <span style=color:#f92672>(</span>or any text editor<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>---
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>## Step 1: Navigate to Your Project</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Open a terminal and move into your project directory:
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>```</span>bash
+</span></span><span style=display:flex><span>cd ~/Documents/projects/my-project
+</span></span></code></pre></div><hr><h2 id=step-2-create-the-deployment-script>Step 2: Create the Deployment Script</h2><p>Create a new script file:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>touch deploy.sh
+</span></span></code></pre></div><p>Open it in your preferred text editor:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>code deploy.sh
+</span></span></code></pre></div><hr><h2 id=step-3-add-the-script>Step 3: Add the Script</h2><p>Paste the following logic into your <code>deploy.sh</code> file:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/sh
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Stop execution if a command fails</span>
+</span></span><span style=display:flex><span>set -e
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>printf <span style=color:#e6db74>&#34;\033[0;32mDeploying project to GitHub...\033[0m\n&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Stage all changes</span>
+</span></span><span style=display:flex><span>git add .
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Create a default commit message</span>
+</span></span><span style=display:flex><span>msg<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Update by </span><span style=color:#66d9ef>$(</span>whoami<span style=color:#66d9ef>)</span><span style=color:#e6db74> on </span><span style=color:#66d9ef>$(</span>date<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># If a custom message is provided, use it instead</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -n <span style=color:#e6db74>&#34;</span>$*<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>    msg<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$*<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;</span>$msg<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Push to GitHub</span>
+</span></span><span style=display:flex><span>git push origin main
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>printf <span style=color:#e6db74>&#34;\033[0;32mDeployment complete.\033[0m\n&#34;</span>
+</span></span></code></pre></div><hr><h2 id=step-4-make-the-script-executable>Step 4: Make the Script Executable</h2><p>Grant the script execute permissions so it can run autonomously:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>chmod +x deploy.sh
+</span></span></code></pre></div><hr><h2 id=step-5-deploy-your-project>Step 5: Deploy Your Project</h2><p>Run the script directly to use the automated timestamp message:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>./deploy.sh
+</span></span></code></pre></div><p>Alternatively, pass a custom message as an argument:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>./deploy.sh <span style=color:#e6db74>&#34;Fix authentication bug&#34;</span>
+</span></span></code></pre></div><hr><h2 id=example-output>Example Output</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Deploying project to GitHub...
+</span></span><span style=display:flex><span>[main 4f83e3d] Fix authentication bug
+</span></span><span style=display:flex><span> 5 files changed...
+</span></span><span style=display:flex><span>Deployment complete.
+</span></span></code></pre></div><hr><h2 id=authentication-note>Authentication Note</h2><p>GitHub no longer supports account passwords when pushing over HTTPS. Instead, ensure you use one of the following secure authentication methods:</p><ul><li><strong>Personal Access Token (PAT):</strong> Recommended if you are connecting over HTTPS.</li><li><strong>SSH Keys:</strong> Recommended for seamless, credential-free terminal use.</li></ul><p>Once configured, your script will execute and push without prompting for interactive credentials.</p><hr><h2 id=bonus-include-a-hugo-build-workflow>Bonus: Include a Hugo Build Workflow</h2><p>If you&rsquo;re deploying a Hugo website, you should compile your static assets right before staging your changes.</p><p>To build your standard production files:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>hugo
+</span></span></code></pre></div><p>For custom-themed projects:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>hugo -t your-theme
+</span></span></code></pre></div><hr><h2 id=complete-integrated-script>Complete Integrated Script</h2><p>Integrating the static compilation step yields the following production script:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/sh
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>set -e
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>printf <span style=color:#e6db74>&#34;\033[0;32mDeploying project to GitHub...\033[0m\n&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Build the Hugo static site</span>
+</span></span><span style=display:flex><span>hugo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Stage files</span>
+</span></span><span style=display:flex><span>git add .
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>msg<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Update by </span><span style=color:#66d9ef>$(</span>whoami<span style=color:#66d9ef>)</span><span style=color:#e6db74> on </span><span style=color:#66d9ef>$(</span>date<span style=color:#66d9ef>)</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -n <span style=color:#e6db74>&#34;</span>$*<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>    msg<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$*<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>git commit -m <span style=color:#e6db74>&#34;</span>$msg<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>git push origin main
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>printf <span style=color:#e6db74>&#34;\033[0;32mDeployment complete.\033[0m\n&#34;</span>
+</span></span></code></pre></div><hr><h2 id=conclusion>Conclusion</h2><p>Automating your Git workflow with a Bash script saves time and eliminates repetitive typing. Instead of manually staging files, writing commits, and pushing flags, you can wrap the entire process up in a single custom terminal call.</p><p>As your infrastructure scales, you can easily extend this file to run automated tests, lint code, or clear caching pipelines prior to running your distribution pushes.</p><pre tabindex=0><code></code></pre></div><div class="mt-12 flex flex-wrap gap-2"><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Git
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">GitHub
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Bash
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Linux
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Terminal</span></div></div></article><nav class="mx-auto max-w-6xl w-full px-4 mt-16 border-t border-gold/20 pt-10 font-mono text-xs text-emerald-deep/60"><div class="grid grid-cols-2 gap-10"><div><a href=https://tejirimayone.com.ng/blog/how-to-install-composer-lammp-ubuntu/ class="group flex flex-col gap-1 hover:text-gold transition-colors w-fit"><span class="text-[10px] uppercase text-emerald-deep/40">Previous</span>
+<span class="font-medium text-sm leading-snug group-hover:text-gold">← How to Install Composer Globally in XAMPP (LAMPP) on Ubuntu</span></a></div><div class=text-right><a href=https://tejirimayone.com.ng/blog/how_to_create_a_simple_floating_menu_with_html_and_css/ class="group flex flex-col gap-1 items-end hover:text-gold transition-colors w-fit ml-auto"><span class="text-[10px] uppercase text-emerald-deep/40">Next</span>
+<span class="font-medium text-sm leading-snug group-hover:text-gold">How to Create a Simple Floating Menu with HTML and CSS →</span></a></div></div></nav><section class="mx-auto max-w-6xl mt-24 py-20 border-t border-gold/20 pt-12 px-4 flex flex-col items-center"><h3 class="font-mono text-xs text-emerald-deep/60 uppercase mb-8 tracking-widest text-center">Related Articles</h3><div class="grid md:grid-cols-3 gap-8 w-full justify-center"><a href=https://tejirimayone.com.ng/blog/upload-files-to-github-using-bash/ class="group block p-5 rounded-xl border border-emerald-deep/10
+hover:border-gold/40 hover:bg-emerald-deep/5
+transition-all duration-300 max-w-sm mx-auto w-full"><div class=mb-4><span class="text-[10px] font-mono text-emerald-deep/40">01</span></div><h4 class="font-mono text-sm font-medium group-hover:text-gold transition-colors mb-3 leading-snug">Upload Files to GitHub Using a Bash Script</h4><p class="text-xs text-emerald-deep/60 leading-relaxed line-clamp-3">Learn how to automate Git commits and pushes with a reusable Bash deployment script.</p><div class="mt-5 text-[10px] uppercase text-emerald-deep/40 group-hover:text-gold transition-colors">Read article →</div></a></div></section></main><section class="py-12 border-t border-emerald-deep/5"><div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"><div class="flex items-center gap-6"><a href=https://github.com/terrymight target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">GitHub
+</a><a href=https://linkedin.com/in/tejiri-mayone-2090a266 target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">LinkedIn
+</a><a href=https://x.com/bobjeorge4real target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">X
+</a><a href=https://youtube.com/@tdevclass target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">YouTube</a></div><div class="flex items-center gap-4"><span class="size-2 rounded-full bg-emerald-mid"></span>
+<span class="text-sm font-medium">Available for Projects
+</span><a href=mailto:hello@tejirimayone.com.ng class="ml-4 text-sm font-mono text-emerald-deep underline decoration-gold/50 underline-offset-4 hover:decoration-gold transition-all">hello@tejirimayone.com.ng</a></div></div></section><footer class="bg-cream border-t border-emerald-deep/5 py-16"><div class="max-w-7xl mx-auto px-6"><div class="flex flex-col md:flex-row justify-between items-start gap-12"><div class=space-y-4><p class="font-mono text-xl font-medium tracking-tight">Tejiri Mayone</p><p class="text-sm text-emerald-deep/50 max-w-[30ch]">Architecting digital solutions with technical precision
+and aesthetic authority.</p></div><div class=text-right><p class="font-mono text-xs text-emerald-deep/30 mb-2 uppercase tracking-tighter">Built with</p><p class="font-mono text-sm">Hugo + Tailwind CSS</p><p class="font-mono text-xs text-emerald-deep/30 mt-8">© 2026 Tejiri Mayone</p></div></div></div></footer><script>document.addEventListener("DOMContentLoaded",()=>{const l=document.getElementById("progress"),n=document.getElementById("navbar"),o=document.getElementById("navbar-inner"),i=document.getElementById("nav-dialog"),e=document.getElementById("nav-backdrop"),t=document.getElementById("nav-panel"),s=document.getElementById("nav-toggle"),d=document.getElementById("nav-close"),u=document.getElementById("mobile-menu");u&&document.body.appendChild(u);let r=!1;const a=()=>{const e=window.scrollY||document.documentElement.scrollTop;if(l){const t=document.documentElement.scrollHeight-document.documentElement.clientHeight,n=t>0?e/t*100:0;l.style.width=n+"%"}n&&o&&(e>40?(n.classList.add("bg-cream/95","shadow-sm","backdrop-blur-sm"),o.classList.remove("py-5"),o.classList.add("py-3")):(n.classList.remove("bg-cream/95","shadow-sm","backdrop-blur-sm"),o.classList.remove("py-3"),o.classList.add("py-5"))),r=!1},h=()=>{r||(requestAnimationFrame(a),r=!0)};function m(){if(!i||!e||!t)return;i.classList.remove("hidden"),document.body.style.overflow="hidden",n&&(n.style.zIndex="0"),s&&(s.style.visibility="hidden"),void t.offsetHeight,requestAnimationFrame(()=>{e.classList.remove("opacity-0"),e.classList.add("opacity-100"),t.classList.remove("translate-x-full"),t.classList.add("translate-x-0")})}function c(){if(!i||!e||!t)return;n&&(n.style.zIndex=""),s&&(s.style.visibility="visible"),e.classList.remove("opacity-100"),e.classList.add("opacity-0"),t.classList.remove("translate-x-0"),t.classList.add("translate-x-full"),document.body.style.overflow="",setTimeout(()=>{i.classList.add("hidden")},300)}a(),window.addEventListener("load",a),window.addEventListener("resize",a),window.addEventListener("scroll",h,{passive:!0}),s&&s.addEventListener("click",m),d&&d.addEventListener("click",c),e&&e.addEventListener("click",c),document.querySelectorAll(".mobile-link").forEach(e=>{e.addEventListener("click",c)})})</script></body></html>

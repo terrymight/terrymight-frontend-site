@@ -1,1 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Designs on Tejiri Mayone</title><link>https://tejirimayone.com.ng/designs/</link><description>Recent content in Designs on Tejiri Mayone</description><generator>Hugo</generator><language>en-us</language><copyright>© copyright 2026</copyright><lastBuildDate>Sun, 13 Apr 2025 20:04:31 +0100</lastBuildDate><atom:link href="https://tejirimayone.com.ng/designs/index.xml" rel="self" type="application/rss+xml"/><item><title>CSS</title><link>https://tejirimayone.com.ng/designs/css/</link><pubDate>Sun, 13 Apr 2025 20:04:31 +0100</pubDate><guid>https://tejirimayone.com.ng/designs/css/</guid><description/></item><item><title>HTML</title><link>https://tejirimayone.com.ng/designs/html/</link><pubDate>Sun, 13 Apr 2025 20:04:31 +0100</pubDate><guid>https://tejirimayone.com.ng/designs/html/</guid><description/></item><item><title>TypeScript</title><link>https://tejirimayone.com.ng/designs/typescript/</link><pubDate>Sun, 13 Apr 2025 20:04:31 +0100</pubDate><guid>https://tejirimayone.com.ng/designs/typescript/</guid><description/></item><item><title>Javascript</title><link>https://tejirimayone.com.ng/designs/javascript/</link><pubDate>Tue, 02 Jul 2024 15:28:41 +0100</pubDate><guid>https://tejirimayone.com.ng/designs/javascript/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Designs on Tejiri Mayone</title>
+    <link>http://localhost:1313/designs/</link>
+    <description>Recent content in Designs on Tejiri Mayone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© copyright 2026</copyright>
+    <atom:link href="http://localhost:1313/designs/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

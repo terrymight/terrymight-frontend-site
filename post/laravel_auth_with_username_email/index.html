@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1">
+
+<title>
+    
+    Implement Username or Email Authentication in Laravel | Tejiri Mayone
+    
+</title>
+
+<meta
+    name="description"
+    content="Learn how to allow users to log in with either their email address or username in a modern Laravel application.">
+
+<meta
+    name="author"
+    content="Tejiri Mayone">
+
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+
+<link rel="stylesheet" href="http://localhost:1313/css/main.min.afc3ac2a6c21515335d32fe88aa2a2f9eb8a3e40894b97c840835188f7ccd463.css">
+
+<link
+    rel="stylesheet"
+    href="http://localhost:1313/css/main.min.afc3ac2a6c21515335d32fe88aa2a2f9eb8a3e40894b97c840835188f7ccd463.css">
+</head>
+
+<body class="bg-cream text-emerald-deep font-sans">
+
+    <nav class="sticky top-0 z-50 bg-cream/90 backdrop-blur-sm border-b border-emerald-deep/5">
+
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+        <a
+    href="http://localhost:1313/"
+    class="font-mono font-semibold tracking-tighter text-lg uppercase text-emerald-deep">
+
+    T.Mayone
+
+</a>
+
+        <div class="hidden md:flex items-center gap-8">
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Index
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/portfolio/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Work
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/services/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Services
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/about/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                About
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/post/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                Notes
+
+            </a>
+
+        
+
+    
+
+        
+
+            <a
+                href="http://localhost:1313/faq/"
+                class="text-sm font-medium text-emerald-deep/80 hover:text-gold transition-colors">
+
+                FAQ
+
+            </a>
+
+        
+
+    
+
+        
+
+    
+
+    <a href="http://localhost:1313/contact/"
+   class="
+   inline-flex items-center justify-center
+   px-4 py-2
+   rounded-sm
+   text-sm
+   font-medium
+   transition-colors
+
+   
+        bg-emerald-deep
+        text-cream
+        hover:bg-emerald-mid
+   
+">
+
+Hire Me
+
+</a>
+
+</div>
+
+        <button
+    class="md:hidden text-emerald-deep text-2xl"
+    type="button"
+    aria-label="Open navigation">
+
+    ☰
+
+</button>
+
+    </div>
+
+</nav>
+
+    <main>
+        
+
+<article class="max-w-3xl mx-auto py-20">
+    <h1 class="text-4xl font-mono mb-6">Implement Username or Email Authentication in Laravel</h1>
+
+    
+        <img src="http://localhost:1313/posts/laravel.jpeg" class="mb-10 rounded-lg">
+    
+
+    <div class="prose">
+        <h2 id="introduction">Introduction</h2>
+<p>Laravel&rsquo;s authentication system handles logins using an email address by default. However, many applications provide better flexibility by letting users authenticate using either their email address or a unique username.</p>
+<p>In this tutorial, you&rsquo;ll learn how to implement username or email authentication seamlessly in a Laravel application.</p>
+<blockquote>
+<p><strong>Prerequisites:</strong> Before getting started, make sure you have:</p>
+<ul>
+<li>PHP 8.2 or later</li>
+<li>Composer</li>
+<li>Laravel 10 or later</li>
+<li>A configured database</li>
+</ul>
+</blockquote>
+<p>If you are creating a fresh project for this, spin it up using Composer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>composer create-project laravel/laravel username-auth
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: <span style="color:#e6db74">&#34;Implement Username or Email Authentication in Laravel&#34;</span>
+</span></span><span style="display:flex;"><span>description: <span style="color:#e6db74">&#34;Learn how to allow users to log in with either their email address or username in a modern Laravel application.&#34;</span>
+</span></span><span style="display:flex;"><span>date: 2023-05-04
+</span></span><span style="display:flex;"><span>summary: <span style="color:#e6db74">&#34;A step-by-step guide to implementing username or email authentication in Laravel.&#34;</span>
+</span></span><span style="display:flex;"><span>cover: <span style="color:#e6db74">&#34;/images/post/laravel.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span>thumbnail: <span style="color:#e6db74">&#34;/images/post/laravel.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span>categories:
+</span></span><span style="display:flex;"><span>  - Laravel
+</span></span><span style="display:flex;"><span>tags:
+</span></span><span style="display:flex;"><span>  - Laravel
+</span></span><span style="display:flex;"><span>  - Authentication
+</span></span><span style="display:flex;"><span>  - PHP
+</span></span><span style="display:flex;"><span>  - Laravel Breeze
+</span></span><span style="display:flex;"><span>authors:
+</span></span><span style="display:flex;"><span>  - Tejiri Mayone
+</span></span><span style="display:flex;"><span>featured: true
+</span></span><span style="display:flex;"><span>draft: false
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Introduction</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Laravel<span style="color:#e6db74">&#39;s authentication system handles logins using an email address by default. However, many applications provide better flexibility by letting users authenticate using either their email address or a unique username.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">In this tutorial, you&#39;</span>ll learn how to implement username or email authentication seamlessly in a Laravel application.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; **Prerequisites:** Before getting started, make sure you have:
+</span></span><span style="display:flex;"><span>&gt; * PHP 8.2 or later
+</span></span><span style="display:flex;"><span>&gt; * Composer
+</span></span><span style="display:flex;"><span>&gt; * Laravel <span style="color:#ae81ff">10</span> or later
+</span></span><span style="display:flex;"><span>&gt; * A configured database
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>If you are creating a fresh project <span style="color:#66d9ef">for</span> this, spin it up using Composer:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```</span>bash
+</span></span><span style="display:flex;"><span>composer create-project laravel/laravel username-auth
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```</span>markdown
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>title: <span style="color:#e6db74">&#34;Implement Username or Email Authentication in Laravel&#34;</span>
+</span></span><span style="display:flex;"><span>description: <span style="color:#e6db74">&#34;Learn how to allow users to log in with either their email address or username in a modern Laravel application.&#34;</span>
+</span></span><span style="display:flex;"><span>date: 2023-05-04
+</span></span><span style="display:flex;"><span>summary: <span style="color:#e6db74">&#34;A step-by-step guide to implementing username or email authentication in Laravel.&#34;</span>
+</span></span><span style="display:flex;"><span>cover: <span style="color:#e6db74">&#34;/images/blog/laravel.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span>thumbnail: <span style="color:#e6db74">&#34;/images/blog/laravel.jpeg&#34;</span>
+</span></span><span style="display:flex;"><span>categories:
+</span></span><span style="display:flex;"><span>  - Laravel
+</span></span><span style="display:flex;"><span>tags:
+</span></span><span style="display:flex;"><span>  - Laravel
+</span></span><span style="display:flex;"><span>  - Authentication
+</span></span><span style="display:flex;"><span>  - PHP
+</span></span><span style="display:flex;"><span>  - Laravel Breeze
+</span></span><span style="display:flex;"><span>authors:
+</span></span><span style="display:flex;"><span>  - Tejiri Mayone
+</span></span><span style="display:flex;"><span>featured: true
+</span></span><span style="display:flex;"><span>draft: false
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Introduction</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Laravel<span style="color:#e6db74">&#39;s authentication system handles logins using an email address by default. However, many applications provide better flexibility by letting users authenticate using either their email address or a unique username.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">In this tutorial, you&#39;</span>ll learn how to implement username or email authentication seamlessly in a Laravel application.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt; **Prerequisites:** Before getting started, make sure you have:
+</span></span><span style="display:flex;"><span>&gt; * PHP 8.2 or later
+</span></span><span style="display:flex;"><span>&gt; * Composer
+</span></span><span style="display:flex;"><span>&gt; * Laravel <span style="color:#ae81ff">10</span> or later
+</span></span><span style="display:flex;"><span>&gt; * A configured database
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>If you are creating a fresh project <span style="color:#66d9ef">for</span> this, spin it up using Composer:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">```</span>bash
+</span></span><span style="display:flex;"><span>composer create-project laravel/laravel username-auth
+</span></span></code></pre></div><hr>
+<h2 id="step-1-install-authentication">Step 1: Install Authentication</h2>
+<p>For modern Laravel applications, Laravel Breeze provides an excellent, lightweight starting point. Run the following commands in your project root to scaffold the auth system:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>composer require laravel/breeze --dev
+</span></span><span style="display:flex;"><span>php artisan breeze:install
+</span></span><span style="display:flex;"><span>php artisan migrate
+</span></span><span style="display:flex;"><span>npm install
+</span></span><span style="display:flex;"><span>npm run dev
+</span></span></code></pre></div><p>You should now have a fully functional login and registration system.</p>
+<hr>
+<h2 id="step-2-add-a-username-column">Step 2: Add a Username Column</h2>
+<p>Next, we need to ensure our database schema accommodates a username field. open your users migration file and add:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span>$table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#39;username&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">unique</span>();
+</span></span></code></pre></div><p>If your application is already running in production, generate a new migration instead of modifying the existing one:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php artisan make:migration add_username_to_users_table
+</span></span></code></pre></div><p>Inside your new migration file, define the schema change:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">Schema</span><span style="color:#f92672">::</span><span style="color:#a6e22e">table</span>(<span style="color:#e6db74">&#39;users&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">Blueprint</span> $table) {
+</span></span><span style="display:flex;"><span>    $table<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">string</span>(<span style="color:#e6db74">&#39;username&#39;</span>)<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">unique</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">after</span>(<span style="color:#e6db74">&#39;email&#39;</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Apply the database changes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>php artisan migrate
+</span></span></code></pre></div><hr>
+<h2 id="step-3-update-the-login-controller">Step 3: Update the Login Controller</h2>
+<p>We need to capture the incoming input and determine whether the user typed an email structure or a username string.</p>
+<p>Modify the <code>store()</code> method inside <code>app/Http/Controllers/Auth/AuthenticatedSessionController.php</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">store</span>(<span style="color:#a6e22e">LoginRequest</span> $request)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $field <span style="color:#f92672">=</span> <span style="color:#a6e22e">filter_var</span>($request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">email</span>, <span style="color:#a6e22e">FILTER_VALIDATE_EMAIL</span>) <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;username&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">merge</span>([
+</span></span><span style="display:flex;"><span>        $field <span style="color:#f92672">=&gt;</span> $request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">email</span>,
+</span></span><span style="display:flex;"><span>    ]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">authenticate</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $request<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">session</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">regenerate</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">redirect</span>()<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">intended</span>(<span style="color:#a6e22e">RouteServiceProvider</span><span style="color:#f92672">::</span><span style="color:#a6e22e">HOME</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="how-it-works">How it works:</h3>
+<p>The <code>FILTER_VALIDATE_EMAIL</code> constant natively inspects the input text. If it formats properly as an email, we pass it forward via the standard <code>'email'</code> array path. If it fails, Laravel implicitly assumes the value is a <code>'username'</code>.</p>
+<hr>
+<h2 id="step-4-update-loginrequest">Step 4: Update LoginRequest</h2>
+<p>Now we need to update the request validator so it attempts authentication using our dynamic field keys.</p>
+<p>Open <code>app/Http/Requests/Auth/LoginRequest.php</code> and replace the original <code>authenticate()</code> method:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">authenticate</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">ensureIsNotRateLimited</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $field <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">has</span>(<span style="color:#e6db74">&#39;username&#39;</span>) <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;username&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;email&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span> <span style="color:#a6e22e">Auth</span><span style="color:#f92672">::</span><span style="color:#a6e22e">attempt</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">only</span>($field, <span style="color:#e6db74">&#39;password&#39;</span>), $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">boolean</span>(<span style="color:#e6db74">&#39;remember&#39;</span>))) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">RateLimiter</span><span style="color:#f92672">::</span><span style="color:#a6e22e">hit</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">throttleKey</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">ValidationException</span><span style="color:#f92672">::</span><span style="color:#a6e22e">withMessages</span>([
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;email&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">trans</span>(<span style="color:#e6db74">&#39;auth.failed&#39;</span>),
+</span></span><span style="display:flex;"><span>        ]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">RateLimiter</span><span style="color:#f92672">::</span><span style="color:#a6e22e">clear</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">throttleKey</span>());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="step-5-update-the-login-form">Step 5: Update the Login Form</h2>
+<p>The beauty of this approach is that you don&rsquo;t need to bloat your UI with separate email and username inputs. Keep your generic string attribute named <code>&quot;email&quot;</code>, but update the placeholders to reflect the new functionality.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">input</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;email&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">placeholder</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Email or Username&#34;</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">required</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">autofocus</span>&gt;
+</span></span></code></pre></div><p>Your controller will automatically parse the input type behind the scenes!</p>
+<hr>
+<h2 id="login-flow-breakdown">Login Flow Breakdown</h2>
+<p>When a user submits the form, the lifecycle behaves as follows:</p>
+<ol>
+<li>The user logs in with either an email address or username.</li>
+<li>The custom logic evaluates the input using native PHP string filters.</li>
+<li>If it looks like an email, authentication is routed to match the <code>email</code> table column.</li>
+<li>If it doesn&rsquo;t match email validation patterns, authentication routes to the <code>username</code> column instead.</li>
+</ol>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>Allowing users to authenticate with either a username or an email address provides an intuitive, friction-free login experience without heavily complicating your codebase.</p>
+<p>By combining Laravel’s underlying <code>Auth::attempt</code> mechanisms with PHP&rsquo;s native validation flags, you gain dual-method processing while keeping your front-end architecture perfectly clean.</p>
+<pre tabindex="0"><code></code></pre>
+    </div>
+</article>
+
+
+    </main>
+
+    <section class="py-12 border-t border-emerald-deep/5">
+
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+
+        <div class="flex items-center gap-6">
+
+            
+
+            <a
+                href="https://github.com/terrymight"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                GitHub
+
+            </a>
+
+            
+
+            <a
+                href="https://linkedin.com/in/tejiri-mayone-2090a266"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                LinkedIn
+
+            </a>
+
+            
+
+            <a
+                href="https://x.com/bobjeorge4real"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                X
+
+            </a>
+
+            
+
+            <a
+                href="https://youtube.com/@tdevclass"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">
+
+                YouTube
+
+            </a>
+
+            
+
+        </div>
+
+        <div class="flex items-center gap-4">
+
+            <span class="size-2 rounded-full bg-emerald-mid"></span>
+
+            <span class="text-sm font-medium">
+
+                Available for Projects
+
+            </span>
+
+            <a
+                href="mailto:hello@tejirimayone.com.ng"
+                class="ml-4 text-sm font-mono text-emerald-deep underline decoration-gold/50 underline-offset-4 hover:decoration-gold transition-all">
+
+                hello@tejirimayone.com.ng
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <footer class="bg-cream border-t border-emerald-deep/5 py-16">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+
+            <div class="space-y-4">
+
+                <p class="font-mono text-xl font-medium tracking-tight">
+
+                    Tejiri Mayone
+
+                </p>
+
+                <p class="text-sm text-emerald-deep/50 max-w-[30ch]">
+
+                    Architecting digital solutions with technical precision
+                    and aesthetic authority.
+
+                </p>
+
+            </div>
+
+            <div class="text-right">
+
+                <p class="font-mono text-xs text-emerald-deep/30 mb-2 uppercase tracking-tighter">
+
+                    Built with
+
+                </p>
+
+                <p class="font-mono text-sm">
+
+                    Hugo &#43; Tailwind CSS
+
+                </p>
+
+                <p class="font-mono text-xs text-emerald-deep/30 mt-8">
+
+                    © 2026 Tejiri Mayone
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>

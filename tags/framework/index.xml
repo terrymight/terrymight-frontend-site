@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FRAMEWORK on Tejiri Mayone</title>
+    <link>http://localhost:1313/tags/framework/</link>
+    <description>Recent content in FRAMEWORK on Tejiri Mayone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© 2026 Tejiri Mayone</copyright>
+    <lastBuildDate>Thu, 04 May 2023 14:33:46 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/framework/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Impletment User Auth Username or Email in Laravel</title>
+      <link>http://localhost:1313/post/laravel_auth_with_username_email/</link>
+      <pubDate>Thu, 04 May 2023 14:33:46 +0200</pubDate>
+      <guid>http://localhost:1313/post/laravel_auth_with_username_email/</guid>
+      <description>Introduction Laravel is a popular PHP framework that is widely used for web application development. One of the most important features of any web application is authentication. In this blog, we will look at how to perform authentication with email or username in Laravel 10.&#xA;Step 1: Install Laravel 10 To get started, you need to have Laravel 10 installed on your system. You can install it using Composer by running the following command in your terminal: Click Laravel site for other options</description>
+    </item>
+  </channel>
+</rss>
