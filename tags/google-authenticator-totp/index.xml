@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Google Authenticator (TOTP) on Tejiri Mayone</title>
+    <link>http://localhost:1313/tags/google-authenticator-totp/</link>
+    <description>Recent content in Google Authenticator (TOTP) on Tejiri Mayone</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© 2026 Tejiri Mayone</copyright>
+    <lastBuildDate>Thu, 16 Jul 2026 19:31:55 +0100</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/google-authenticator-totp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google Authenticator (TOTP) two-factor authentication in a stateless Laravel API authenticated via Laravel Passport</title>
+      <link>http://localhost:1313/blog/google-authenticator-two-factor-authentication/</link>
+      <pubDate>Thu, 16 Jul 2026 19:31:55 +0100</pubDate>
+      <guid>http://localhost:1313/blog/google-authenticator-two-factor-authentication/</guid>
+      <description>A practical guide to building a modern portfolio website with Hugo, Tailwind CSS, reusable partials, and content-driven architecture.</description>
+    </item>
+  </channel>
+</rss>

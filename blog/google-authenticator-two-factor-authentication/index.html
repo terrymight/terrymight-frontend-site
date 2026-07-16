@@ -1,0 +1,289 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>How to Implement Google Authenticator (TOTP) Two-Factor Authentication in a Stateless Laravel API Using Laravel Passport | Tejiri Mayone
+</title><meta name=title content=" How to Implement Google Authenticator (TOTP) Two-Factor Authentication in a Stateless Laravel API Using Laravel Passport"><meta name=description content="Learn how to implement secure Google Authenticator (TOTP) two-factor authentication in a stateless Laravel API using Laravel Passport. Includes complete source code, QR code generation, temporary login tokens, and production security best practices."><meta name=author content="Tejiri Mayone"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel=stylesheet><link rel=stylesheet href=https://tejirimayone.com.ng/css/main.min.735a5e38c05ae082a568719ee550d2d3b66b8e155465be8ba27f34b6754f5e07.css><link rel=stylesheet href=https://tejirimayone.com.ng/css/main.min.735a5e38c05ae082a568719ee550d2d3b66b8e155465be8ba27f34b6754f5e07.css></head><body class="bg-cream text-emerald-deep font-sans"><div id=progress class="fixed top-0 left-0 h-1 bg-gold z-[9999] transition-all duration-75" style=width:0%></div><nav id=navbar class="fixed top-0 left-0 w-full z-40 transition-all duration-300 bg-cream/80 backdrop-blur-md border-b border-emerald-deep/10"><div id=navbar-inner class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between transition-all duration-300"><div class="font-mono text-sm uppercase tracking-widest"><a href=https://tejirimayone.com.ng/ class="font-mono font-semibold tracking-tighter text-lg uppercase text-emerald-deep">T.Mayone</a></div><div class="hidden md:flex gap-8 font-mono text-xs text-emerald-deep/70"><div class="hidden md:flex gap-8 items-center"><a href=https://tejirimayone.com.ng/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Index
+</a><a href=https://tejirimayone.com.ng/portfolio/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Work
+</a><a href=https://tejirimayone.com.ng/services/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Services
+</a><a href=https://tejirimayone.com.ng/about/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">About
+</a><a href=https://tejirimayone.com.ng/blog/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">Notes
+</a><a href=https://tejirimayone.com.ng/faq/ class="relative font-mono text-xs uppercase tracking-widest hover:text-gold">FAQ
+</a><a href=https://tejirimayone.com.ng/contact/ class="relative inline-flex items-center px-5 py-2 text-xs font-mono uppercase tracking-widest text-cream bg-emerald-deep rounded-2xl overflow-hidden group transition-all"><span class="relative z-10">Hire Me</span>
+<span class="absolute inset-0 bg-emerald-deep/80 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span></a></div></div><div class=md:hidden><button id=nav-toggle class="md:hidden text-[#064e3b] text-3xl p-2 focus:outline-none" type=button aria-label="Open menu">
+☰</button><div id=nav-dialog style=z-index:2147483647!important class="fixed inset-0 hidden" role=dialog aria-modal=true><div id=nav-backdrop class="fixed inset-0 bg-[#064e3b]/40 backdrop-blur-md opacity-0 transition-all duration-300 z-0"></div><div id=mobile-menu class="fixed inset-0 overflow-hidden pointer-events-none"><div id=nav-panel class="pointer-events-auto absolute right-0 inset-y-0 w-[80%] max-w-sm bg-[#f5f0e0] shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-in-out"><div class="flex items-start justify-end p-6"><button id=nav-close type=button class="text-[#064e3b] hover:text-[#c9a84c] text-2xl p-2 transition-colors focus:outline-none" aria-label="Close menu">
+✕</button></div><nav class="flex-1 overflow-y-auto px-8 py-4"><div class="flex flex-col gap-6 font-mono text-sm uppercase text-[#064e3b]"><a href=https://tejirimayone.com.ng/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Index
+</a><a href=https://tejirimayone.com.ng/portfolio/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Work
+</a><a href=https://tejirimayone.com.ng/services/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Services
+</a><a href=https://tejirimayone.com.ng/about/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">About
+</a><a href=https://tejirimayone.com.ng/blog/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Notes
+</a><a href=https://tejirimayone.com.ng/faq/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">FAQ
+</a><a href=https://tejirimayone.com.ng/contact/ class="mobile-link hover:text-[#c9a84c] transition-colors block py-2">Hire Me</a></div></nav></div></div></div></div></div></nav><main><article class="py-28 bg-cream"><div class="max-w-3xl mx-auto px-6 leading-relaxed"><header class=mb-10><a href=https://tejirimayone.com.ng/blog/ class="inline-block mb-10 font-mono text-xs text-gold underline">← Back to Blog</a><h1 class="text-5xl font-mono font-medium uppercase leading-tight">How to Implement Google Authenticator (TOTP) Two-Factor Authentication in a Stateless Laravel API Using Laravel Passport</h1><div class="mt-4 flex items-center gap-3 font-mono text-xs text-emerald-deep/50 uppercase"><span>16 Jul 2026</span>
+<span class="size-1 rounded-full bg-gold"></span>
+<span>Laravel
+</span><span class="size-1 rounded-full bg-gold"></span>
+<span>5 min read</span></div></header><img src=https://tejirimayone.com.ng/posts/google-authenticator-two-factor-authentication-thumbnail.png class="w-full rounded-lg mb-10" loading=lazy><div class="prose max-w-none text-emerald-deep/80"><p>Since Passport issues stateless OAuth2 tokens, issuing a valid token <em>before</em> 2FA verification is a major security risk. Instead, we will use a <strong>cache-backed temporary token</strong> pattern:</p><ol><li><strong>Step 1:</strong> The user logs in with their email and password.</li><li><strong>Step 2:</strong> If 2FA is <strong>disabled</strong>, we immediately return the Passport access token. If 2FA is <strong>enabled</strong>, we return a short-lived <code>temp_token</code> (stored in the cache for 5 minutes).</li><li><strong>Step 3:</strong> The frontend prompts the user for their 6-digit OTP and submits it along with the <code>temp_token</code> to get their final Passport token.</li></ol><p>Here is the step-by-step implementation guide:</p><hr><h2 id=2fa--passport-setup-sequence>2FA & Passport Setup Sequence</h2><ol><li><strong>Install Dependencies:</strong> Terminal.
+Install the standard Google 2FA engine and the QR code renderer package via Composer:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>composer require pragmarx/google2fa bacon/bacon-qr-code
+</span></span></code></pre></div><ol start=2><li><strong>Create Database Migration:</strong> Database Schema.
+Create a migration to add 2FA fields to your <code>users</code> table:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>php artisan make:migration add_two_factor_columns_to_users_table
+</span></span></code></pre></div><p>In the generated file, add the necessary columns:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Database\Migrations\Migration</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Database\Schema\Blueprint</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Support\Facades\Schema</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>extends</span> <span style=color:#a6e22e>Migration</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>up</span>()<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Schema</span><span style=color:#f92672>::</span><span style=color:#a6e22e>table</span>(<span style=color:#e6db74>&#39;users&#39;</span>, <span style=color:#66d9ef>function</span> (<span style=color:#a6e22e>Blueprint</span> $table) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Secret key generated for Google Authenticator
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            $table<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>text</span>(<span style=color:#e6db74>&#39;google2fa_secret&#39;</span>)<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>nullable</span>();
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Flag to check if they have actively enabled 2FA
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            $table<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>boolean</span>(<span style=color:#e6db74>&#39;google2fa_enabled&#39;</span>)<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>default</span>(<span style=color:#66d9ef>false</span>);
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>down</span>()<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Schema</span><span style=color:#f92672>::</span><span style=color:#a6e22e>table</span>(<span style=color:#e6db74>&#39;users&#39;</span>, <span style=color:#66d9ef>function</span> (<span style=color:#a6e22e>Blueprint</span> $table) {
+</span></span><span style=display:flex><span>            $table<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>dropColumn</span>([<span style=color:#e6db74>&#39;google2fa_secret&#39;</span>, <span style=color:#e6db74>&#39;google2fa_enabled&#39;</span>]);
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>Run the migration:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>php artisan migrate
+</span></span></code></pre></div><ol start=3><li><strong>Configure the User Model:</strong> App\Models\User.php.
+Update your <code>User</code> model to allow mass-assignment on the new columns.</li></ol><blockquote><p><strong>Crucial Security Tip:</strong> Always cast your <code>google2fa_secret</code> to <code>'encrypted'</code>. This guarantees that even if your database is leaked, attackers cannot extract the raw secrets to bypass 2FA.</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>protected</span> $fillable <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;name&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;email&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;password&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;google2fa_secret&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;google2fa_enabled&#39;</span>,
+</span></span><span style=display:flex><span>];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>protected</span> $casts <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;password&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;hashed&#39;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>&#39;google2fa_secret&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;encrypted&#39;</span>, <span style=color:#75715e>// Automatic encryption/decryption
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#e6db74>&#39;google2fa_enabled&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;boolean&#39;</span>,
+</span></span><span style=display:flex><span>];
+</span></span></code></pre></div><ol start=4><li><strong>Define API Routes:</strong> routes/api.php.
+Register the endpoints. We need public endpoints for logging in and authenticated endpoints for managing (enabling/disabling) 2FA settings:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>App\Http\Controllers\AuthController</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>App\Http\Controllers\TwoFactorController</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Support\Facades\Route</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Public Auth Endpoints
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>Route</span><span style=color:#f92672>::</span><span style=color:#a6e22e>post</span>(<span style=color:#e6db74>&#39;/login&#39;</span>, [<span style=color:#a6e22e>AuthController</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>, <span style=color:#e6db74>&#39;login&#39;</span>]);
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Route</span><span style=color:#f92672>::</span><span style=color:#a6e22e>post</span>(<span style=color:#e6db74>&#39;/login/verify-2fa&#39;</span>, [<span style=color:#a6e22e>AuthController</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>, <span style=color:#e6db74>&#39;verify2FA&#39;</span>]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Protected Auth Endpoints (Requires Passport Guard)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>Route</span><span style=color:#f92672>::</span><span style=color:#a6e22e>middleware</span>(<span style=color:#e6db74>&#39;auth:api&#39;</span>)<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>group</span>(<span style=color:#66d9ef>function</span> () {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Route</span><span style=color:#f92672>::</span><span style=color:#a6e22e>post</span>(<span style=color:#e6db74>&#39;/2fa/setup&#39;</span>, [<span style=color:#a6e22e>TwoFactorController</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>, <span style=color:#e6db74>&#39;setup&#39;</span>]);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Route</span><span style=color:#f92672>::</span><span style=color:#a6e22e>post</span>(<span style=color:#e6db74>&#39;/2fa/enable&#39;</span>, [<span style=color:#a6e22e>TwoFactorController</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>, <span style=color:#e6db74>&#39;enable&#39;</span>]);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Route</span><span style=color:#f92672>::</span><span style=color:#a6e22e>post</span>(<span style=color:#e6db74>&#39;/2fa/disable&#39;</span>, [<span style=color:#a6e22e>TwoFactorController</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>, <span style=color:#e6db74>&#39;disable&#39;</span>]);
+</span></span><span style=display:flex><span>});
+</span></span></code></pre></div><ol start=5><li><strong>Build the Optional Login Flow:</strong> App\Http\Controllers\AuthController.php.
+Create the main controller handling standard password verification and conditional 2FA challenge redirection:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>App\Http\Controllers</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>App\Models\User</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Http\Request</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Support\Facades\Hash</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Support\Facades\Cache</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Support\Str</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>PragmaRX\Google2FA\Google2FA</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>AuthController</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>Controller</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>login</span>(<span style=color:#a6e22e>Request</span> $request)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>validate</span>([
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;email&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;required|email&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;password&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;required|string&#39;</span>,
+</span></span><span style=display:flex><span>        ]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        $user <span style=color:#f92672>=</span> <span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>where</span>(<span style=color:#e6db74>&#39;email&#39;</span>, $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>email</span>)<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>first</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>$user <span style=color:#f92672>||</span> <span style=color:#f92672>!</span><span style=color:#a6e22e>Hash</span><span style=color:#f92672>::</span><span style=color:#a6e22e>check</span>($request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>password</span>, $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>password</span>)) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([<span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Invalid credentials.&#39;</span>], <span style=color:#ae81ff>401</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Optional 2FA Check
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> ($user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa_enabled</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// Issue an opaque temporary token valid for 5 minutes
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            $tempToken <span style=color:#f92672>=</span> <span style=color:#a6e22e>Str</span><span style=color:#f92672>::</span><span style=color:#a6e22e>random</span>(<span style=color:#ae81ff>60</span>);
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Cache</span><span style=color:#f92672>::</span><span style=color:#a6e22e>put</span>(<span style=color:#e6db74>&#34;2fa_login_</span><span style=color:#e6db74>{</span>$tempToken<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>, $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span>, <span style=color:#a6e22e>now</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>addMinutes</span>(<span style=color:#ae81ff>5</span>));
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;requires_2fa&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;temp_token&#39;</span> <span style=color:#f92672>=&gt;</span> $tempToken,
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Please provide your Google Authenticator verification code.&#39;</span>
+</span></span><span style=display:flex><span>            ]);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Normal Flow: 2FA is disabled, issue Passport token immediately
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $tokenResult <span style=color:#f92672>=</span> $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createToken</span>(<span style=color:#e6db74>&#39;Personal Access Token&#39;</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;requires_2fa&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>false</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;access_token&#39;</span> <span style=color:#f92672>=&gt;</span> $tokenResult<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>accessToken</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;token_type&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Bearer&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;user&#39;</span> <span style=color:#f92672>=&gt;</span> $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>only</span>([<span style=color:#e6db74>&#39;id&#39;</span>, <span style=color:#e6db74>&#39;name&#39;</span>, <span style=color:#e6db74>&#39;email&#39;</span>])
+</span></span><span style=display:flex><span>        ]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>verify2FA</span>(<span style=color:#a6e22e>Request</span> $request)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>validate</span>([
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;temp_token&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;required|string&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;otp&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;required|digits:6&#39;</span>,
+</span></span><span style=display:flex><span>        ]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Resolve temporary user from Cache
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $userId <span style=color:#f92672>=</span> <span style=color:#a6e22e>Cache</span><span style=color:#f92672>::</span><span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;2fa_login_</span><span style=color:#e6db74>{</span>$request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>temp_token</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>$userId) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([<span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Verification window expired. Please try logging in again.&#39;</span>], <span style=color:#ae81ff>422</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        $user <span style=color:#f92672>=</span> <span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>findOrFail</span>($userId);
+</span></span><span style=display:flex><span>        $google2fa <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Google2FA</span>();
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Validate the 6-digit OTP code against user secret
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $isValid <span style=color:#f92672>=</span> $google2fa<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>verifyKey</span>($user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa_secret</span>, $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>otp</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>$isValid) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([<span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Invalid verification code.&#39;</span>], <span style=color:#ae81ff>422</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Cleanup the temporary cache key
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>Cache</span><span style=color:#f92672>::</span><span style=color:#a6e22e>forget</span>(<span style=color:#e6db74>&#34;2fa_login_</span><span style=color:#e6db74>{</span>$request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>temp_token</span><span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Create Passport Token
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $tokenResult <span style=color:#f92672>=</span> $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>createToken</span>(<span style=color:#e6db74>&#39;Personal Access Token&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;access_token&#39;</span> <span style=color:#f92672>=&gt;</span> $tokenResult<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>accessToken</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;token_type&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Bearer&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;user&#39;</span> <span style=color:#f92672>=&gt;</span> $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>only</span>([<span style=color:#e6db74>&#39;id&#39;</span>, <span style=color:#e6db74>&#39;name&#39;</span>, <span style=color:#e6db74>&#39;email&#39;</span>])
+</span></span><span style=display:flex><span>        ]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><ol start=6><li><strong>Write the 2FA Setup/Enable Logic:</strong> App\Http\Controllers\TwoFactorController.php.
+Create the management endpoints for users to initialize, verify, and disable 2FA within their profile:</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=display:flex><span><span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>App\Http\Controllers</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Http\Request</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Illuminate\Support\Facades\Hash</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>PragmaRX\Google2FA\Google2FA</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>BaconQrCode\Renderer\ImageRenderer</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>BaconQrCode\Renderer\Image\SvgImageBackEnd</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>BaconQrCode\Renderer\RendererStyle\RendererStyle</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> <span style=color:#a6e22e>BaconQrCode\Writer</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TwoFactorController</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>Controller</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> $google2fa;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> __construct()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Google2FA</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 1. Initialize 2FA (Generate Secret and QR Code)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>(<span style=color:#a6e22e>Request</span> $request)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $user <span style=color:#f92672>=</span> $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>user</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Generate secret key
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $secret <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>generateSecretKey</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Temporarily store it, but do NOT set enabled = true yet
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa_secret</span> <span style=color:#f92672>=</span> $secret;
+</span></span><span style=display:flex><span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>save</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Generate the QR URL
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $qrCodeUrl <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getQRCodeUrl</span>(
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>config</span>(<span style=color:#e6db74>&#39;app.name&#39;</span>),
+</span></span><span style=display:flex><span>            $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>email</span>,
+</span></span><span style=display:flex><span>            $secret
+</span></span><span style=display:flex><span>        );
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Render SVG output of the QR Code for frontend displaying
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $renderer <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>ImageRenderer</span>(
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>RendererStyle</span>(<span style=color:#ae81ff>250</span>),
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>SvgImageBackEnd</span>()
+</span></span><span style=display:flex><span>        );
+</span></span><span style=display:flex><span>        $writer <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Writer</span>($renderer);
+</span></span><span style=display:flex><span>        $qrCodeSvg <span style=color:#f92672>=</span> $writer<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>writeString</span>($qrCodeUrl);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;secret&#39;</span> <span style=color:#f92672>=&gt;</span> $secret,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;qr_code_svg&#39;</span> <span style=color:#f92672>=&gt;</span> $qrCodeSvg <span style=color:#75715e>// Send SVG markup directly to your UI
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        ]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 2. Validate and Turn ON 2FA (Ensures they actually scanned it)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>enable</span>(<span style=color:#a6e22e>Request</span> $request)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>validate</span>([
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;otp&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;required|digits:6&#39;</span>,
+</span></span><span style=display:flex><span>        ]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        $user <span style=color:#f92672>=</span> $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>user</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Verify they put the correct code from their freshly scanned app
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        $isValid <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa</span><span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>verifyKey</span>($user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa_secret</span>, $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>otp</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>$isValid) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([<span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Invalid verification code.&#39;</span>], <span style=color:#ae81ff>422</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa_enabled</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>save</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([<span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Two-Factor Authentication activated successfully.&#39;</span>]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// 3. Disable 2FA
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>disable</span>(<span style=color:#a6e22e>Request</span> $request)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>validate</span>([
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#39;password&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;required|string&#39;</span>,
+</span></span><span style=display:flex><span>        ]);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        $user <span style=color:#f92672>=</span> $request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>user</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Require password verification to ensure owner action
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span><span style=color:#a6e22e>Hash</span><span style=color:#f92672>::</span><span style=color:#a6e22e>check</span>($request<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>password</span>, $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>password</span>)) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([<span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Incorrect password confirmation.&#39;</span>], <span style=color:#ae81ff>422</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa_secret</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>google2fa_enabled</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>        $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>save</span>();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>json</span>([<span style=color:#e6db74>&#39;message&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;Two-Factor Authentication deactivated.&#39;</span>]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h3 id=important-developer-tips>Important Developer Tips</h3><ul><li><strong>Handling Front-End SVG:</strong>
+The <code>qr_code_svg</code> returned from <code>/2fa/setup</code> is a pure string of SVG raw data. On your frontend framework (React, Vue, etc.), you can easily inject this safely inside your template:</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!-- Vue --&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>v-html</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;qr_code_svg&#34;</span>&gt;&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>&lt;!-- React --&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>dangerouslySetInnerHTML</span><span style=color:#f92672>=</span><span style=color:#e6db74>{{</span> <span style=color:#a6e22e>__html:</span> <span style=color:#a6e22e>qr_code_svg</span> <span style=color:#960050;background-color:#1e0010>}}</span> /&gt;
+</span></span></code></pre></div><ul><li><strong>Clock Sync on Server:</strong>
+TOTP relies heavily on the time on your server syncing perfectly with the user&rsquo;s mobile phone. If you run into issues where correct codes are rejected, ensure your server is running a time-sync service like <strong>NTP (Network Time Protocol)</strong> to avoid drift.</li></ul></div><div class="mt-12 flex flex-wrap gap-2"><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Laravel
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Laravel Passport
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Google Authenticator
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">TOTP
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Two-Factor Authentication
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">2FA
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">OAuth2
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Stateless API
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">API Authentication
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">PHP
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">REST API
+</span><span class="text-[10px] font-mono px-2 py-1 border border-emerald-deep/10 text-emerald-deep/50 uppercase">Web Security</span></div></div></article><nav class="mx-auto max-w-6xl w-full px-4 mt-16 border-t border-gold/20 pt-10 font-mono text-xs text-emerald-deep/60"><div class="grid grid-cols-2 gap-10"><div><a href=https://tejirimayone.com.ng/portfolio/apex-real-estate/ class="group flex flex-col gap-1 hover:text-gold transition-colors w-fit"><span class="text-[10px] uppercase text-emerald-deep/40">Previous</span>
+<span class="font-medium text-sm leading-snug group-hover:text-gold">← Apex Real Estate</span></a></div><div class=text-right><a href=https://tejirimayone.com.ng/services/consulting/ class="group flex flex-col gap-1 items-end hover:text-gold transition-colors w-fit ml-auto"><span class="text-[10px] uppercase text-emerald-deep/40">Next</span>
+<span class="font-medium text-sm leading-snug group-hover:text-gold">Consulting →</span></a></div></div></nav><section class="mx-auto max-w-6xl mt-24 py-20 border-t border-gold/20 pt-12 px-4 flex flex-col items-center"><h3 class="font-mono text-xs text-emerald-deep/60 uppercase mb-8 tracking-widest text-center">Related Articles</h3><div class="grid md:grid-cols-3 gap-8 w-full justify-center"><a href=https://tejirimayone.com.ng/blog/google-authenticator-two-factor-authentication/ class="group block p-5 rounded-xl border border-emerald-deep/10
+hover:border-gold/40 hover:bg-emerald-deep/5
+transition-all duration-300 max-w-sm mx-auto w-full"><div class=mb-4><span class="text-[10px] font-mono text-emerald-deep/40">01</span></div><h4 class="font-mono text-sm font-medium group-hover:text-gold transition-colors mb-3 leading-snug">How to Implement Google Authenticator (TOTP) Two-Factor Authentication in a Stateless Laravel API Using Laravel Passport</h4><p class="text-xs text-emerald-deep/60 leading-relaxed line-clamp-3">A complete step-by-step guide to implementing optional Google Authenticator (TOTP) two-factor authentication in Laravel Passport APIs using a secure temporary token workflow.</p><div class="mt-5 text-[10px] uppercase text-emerald-deep/40 group-hover:text-gold transition-colors">Read article →</div></a><a href=https://tejirimayone.com.ng/blog/laravel_auth_with_username_email/ class="group block p-5 rounded-xl border border-emerald-deep/10
+hover:border-gold/40 hover:bg-emerald-deep/5
+transition-all duration-300 max-w-sm mx-auto w-full"><div class=mb-4><span class="text-[10px] font-mono text-emerald-deep/40">02</span></div><h4 class="font-mono text-sm font-medium group-hover:text-gold transition-colors mb-3 leading-snug">Implement Username or Email Authentication in Laravel</h4><p class="text-xs text-emerald-deep/60 leading-relaxed line-clamp-3">A step-by-step guide to implementing username or email authentication in Laravel.</p><div class="mt-5 text-[10px] uppercase text-emerald-deep/40 group-hover:text-gold transition-colors">Read article →</div></a></div></section></main><section class="py-12 border-t border-emerald-deep/5"><div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"><div class="flex items-center gap-6"><a href=https://github.com/terrymight target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">GitHub
+</a><a href=https://linkedin.com/in/tejiri-mayone target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">LinkedIn
+</a><a href=https://x.com/bobjeorge4real target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">X
+</a><a href=https://youtube.com/@tdevclass target=_blank rel="noopener noreferrer" class="font-mono text-xs text-emerald-deep/40 hover:text-gold uppercase tracking-widest transition-colors">YouTube</a></div><div class="flex items-center gap-4"><span class="size-2 rounded-full bg-emerald-mid"></span>
+<span class="text-sm font-medium">Available for Projects
+</span><a href=mailto:hello@tejirimayone.com.ng class="ml-4 text-sm font-mono text-emerald-deep underline decoration-gold/50 underline-offset-4 hover:decoration-gold transition-all">hello@tejirimayone.com.ng</a></div></div></section><footer class="bg-cream border-t border-emerald-deep/5 py-16"><div class="max-w-7xl mx-auto px-6"><div class="flex flex-col md:flex-row justify-between items-start gap-12"><div class=space-y-4><p class="font-mono text-xl font-medium tracking-tight">Tejiri Mayone</p><p class="text-sm text-emerald-deep/50 max-w-[30ch]">Architecting digital solutions with technical precision
+and aesthetic authority.</p></div><div class=text-right><p class="font-mono text-xs text-emerald-deep/30 mb-2 uppercase tracking-tighter">Built with</p><p class="font-mono text-sm">Hugo + Tailwind CSS</p><p class="font-mono text-xs text-emerald-deep/30 mt-8">© 2026 Tejiri Mayone</p></div></div></div></footer><script>document.addEventListener("DOMContentLoaded",()=>{const l=document.getElementById("progress"),n=document.getElementById("navbar"),o=document.getElementById("navbar-inner"),i=document.getElementById("nav-dialog"),e=document.getElementById("nav-backdrop"),t=document.getElementById("nav-panel"),s=document.getElementById("nav-toggle"),d=document.getElementById("nav-close"),u=document.getElementById("mobile-menu");u&&document.body.appendChild(u);let r=!1;const a=()=>{const e=window.scrollY||document.documentElement.scrollTop;if(l){const t=document.documentElement.scrollHeight-document.documentElement.clientHeight,n=t>0?e/t*100:0;l.style.width=n+"%"}n&&o&&(e>40?(n.classList.add("bg-cream/95","shadow-sm","backdrop-blur-sm"),o.classList.remove("py-5"),o.classList.add("py-3")):(n.classList.remove("bg-cream/95","shadow-sm","backdrop-blur-sm"),o.classList.remove("py-3"),o.classList.add("py-5"))),r=!1},h=()=>{r||(requestAnimationFrame(a),r=!0)};function m(){if(!i||!e||!t)return;i.classList.remove("hidden"),document.body.style.overflow="hidden",n&&(n.style.zIndex="0"),s&&(s.style.visibility="hidden"),void t.offsetHeight,requestAnimationFrame(()=>{e.classList.remove("opacity-0"),e.classList.add("opacity-100"),t.classList.remove("translate-x-full"),t.classList.add("translate-x-0")})}function c(){if(!i||!e||!t)return;n&&(n.style.zIndex=""),s&&(s.style.visibility="visible"),e.classList.remove("opacity-100"),e.classList.add("opacity-0"),t.classList.remove("translate-x-0"),t.classList.add("translate-x-full"),document.body.style.overflow="",setTimeout(()=>{i.classList.add("hidden")},300)}a(),window.addEventListener("load",a),window.addEventListener("resize",a),window.addEventListener("scroll",h,{passive:!0}),s&&s.addEventListener("click",m),d&&d.addEventListener("click",c),e&&e.addEventListener("click",c),document.querySelectorAll(".mobile-link").forEach(e=>{e.addEventListener("click",c)})})</script></body></html>
